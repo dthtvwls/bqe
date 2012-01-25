@@ -19,6 +19,10 @@ io = require('socket.io').listen app, transports: ['xhr-polling'], 'polling dura
 # Listen for messages on connected sockets and send them back
 io.sockets.on 'connection', (socket)-> socket.on 'message', (message)-> socket.send message
 
+# facebook-client (https://github.com/DracoBlue/node-facebook-client)
+FacebookClient = require('facebook-client').FacebookClient
+facebook_client = new FacebookClient '282526041801577', '6e63390355ab12ee2e2315c2fda19566'
+
 # Connect Mongoose to MongoDB
 mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
 
