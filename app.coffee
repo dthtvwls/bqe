@@ -34,4 +34,7 @@ app.resource 'likes', require './resources/likes'
 
 app.get '/', (request, response)-> response.render 'home', title: 'Hello World'
 
+# Blitz
+app.get '/mu-1234-cafe-5678-babe', (request, response)-> response.send '42'
+
 app.listen process.env.PORT || 5000
