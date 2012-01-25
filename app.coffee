@@ -3,7 +3,7 @@ mongoose = require 'mongoose'
 stylus   = require 'stylus'
 public   = __dirname + '/public'
 
-require __dirname + '/models/like.coffee'
+#require __dirname + '/models/like.coffee'
 
 # Create the Mongoose connection
 mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
