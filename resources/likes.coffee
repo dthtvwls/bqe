@@ -11,8 +11,7 @@ exports.new = (request, response)->
 exports.create = (request, response)->
   like = new Like request.body.like
   like.save()
-  response.writeHead 303, 'Location': '/likes/' + like.id
-  response.end()
+  response.redirect '/likes/#{like.id}'
 
 # show
 exports.show = (request, response)->
@@ -26,12 +25,11 @@ exports.edit = (request, response)->
 
 # update
 exports.update = (request, response)->
-  Like.update { id: request.params.like }, request.body.like, {}, (error, like)->
-    response.writeHead 303, 'Location': '/likes/' + like.id
-    response.end()
+  Like.update { _id: request.params.like }, request.body.like, upset: true, (error)->
+    response.redirect '/likes/#{request.params.like}'
 
 # destroy
 exports.destroy = (request, response)->
-  Like.remove { id: request.params.like }, (error, like)->
-    response.writeHead 303, 'Location': '/likes'
-    response.end()
+  Like.findById request.params.like, (error, like)->
+    like.remove()
+    response.redirect '/likes'
