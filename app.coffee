@@ -23,11 +23,11 @@ io.sockets.on 'connection', (socket)-> socket.on 'message', (message)-> socket.s
 mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
 
 # Include Mongoose models
-Like = require('./models/like') mongoose
+require('./models/like') mongoose
 
 # Include Express resources
-app.resource 'likes', require('./resources/likes') Like
+app.resource 'likes', require './resources/likes'
 
-app.get '/', (request, response)-> response.render 'index', title: 'Hello World'
+app.get '/', (request, response)-> response.render 'home', title: 'Hello World'
 
 app.listen process.env.PORT || 5000

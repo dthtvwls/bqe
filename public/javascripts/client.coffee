@@ -4,10 +4,9 @@ $.getScript '/socket.io/socket.io.js', ->
 
   # If Socket.IO server is running correctly,
   # it will send our message back to the client
-  socket.send 'hello'
+  #socket.send 'hello'
 
 $.getScript '//connect.facebook.net/en_US/all.js', ->
-  # Facebook init
   FB.init
     appId: '282526041801577'
     oauth: true
