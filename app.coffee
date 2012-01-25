@@ -1,20 +1,30 @@
 express  = require 'express'
+resource = require 'express-resource'
 mongoose = require 'mongoose'
 stylus   = require 'stylus'
-public   = __dirname + '/public'
+
+# Connect Mongoose to MongoDB
+mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
 
 # Create the Express app
-app = express.createServer express.logger, express.bodyParser, express.methodOverride
+app = express.createServer express.logger(), express.bodyParser(), express.methodOverride()
 
 # Express configuration
 app.configure ->
   app.use express.errorHandler dumpExceptions: true, showStack: true
-  app.use stylus.middleware src: public, compress: true
-  app.use express.static public
+  app.use stylus.middleware src: './public', compress: true
+  app.use express.static './public'
+  app.set 'view engine', 'jade'
   app.use app.router
 
-# Respond to application root
-app.get '/', (request, response)-> response.render 'index.jade', title: 'Hello World'
+app.get '/', (request, response)-> response.render 'index', title: 'Hello World'
+
+
+# Include Mongoose models
+Like = require('./models/like') mongoose
+
+# Include Express resources
+likes = app.resource 'likes', require('./resources/likes') Like
 
 
 # Set up Socket.IO with xhr settings for Heroku
@@ -25,12 +35,4 @@ io = require('socket.io').listen app,
 io.sockets.on 'connection', (socket)-> socket.on 'message', (message)-> socket.send message
 
 
-# Connect Mongoose to MongoDB
-mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
-
-# Include Mongoose models
-Like = require(__dirname + '/models/like.coffee') mongoose
-
-
-# Listen to HTTP
 app.listen process.env.PORT || 5000

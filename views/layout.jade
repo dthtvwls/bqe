@@ -1,4 +1,4 @@
-!!!5
+!!! 5
 html(xmlns:fb='http://www.facebook.com/2008/fbml')
   head
     title= title
@@ -10,5 +10,7 @@ html(xmlns:fb='http://www.facebook.com/2008/fbml')
     script(src='//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.1.2/coffee-script.min.js')
     script(src='//connect.facebook.net/en_US/all.js')
     script(src='/socket.io/socket.io.js')
-    script(type='text/coffeescript', src='/coffeescripts/client.coffee')
-  body!= body
+    script(type='text/coffeescript', src='/javascripts/client.coffee')
+  body
+    != body
+    #fb-root
