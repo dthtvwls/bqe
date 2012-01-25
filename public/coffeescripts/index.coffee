@@ -5,7 +5,7 @@ FB.init
   status: true
   cookie: true
 
-FB.login (res)->
-  if (res.authResponse)
-    alert res.authResponse.accessToken
+FB.login (response)->
+  if (response.authResponse)
+    alert response.authResponse.accessToken
 , scope: 'email'

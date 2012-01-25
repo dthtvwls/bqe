@@ -1,16 +1,17 @@
-exp = require 'express'
-mon = require 'mongoose'
-pub = __dirname + '/public'
+express  = require 'express'
+mongoose = require 'mongoose'
+stylus   = require 'stylus'
+public   = __dirname + '/public'
 
-app = exp.createServer exp.logger(), exp.bodyParser(), exp.methodOverride()
+mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
 
-mon.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
+app = express.createServer express.logger(), express.bodyParser(), express.methodOverride()
 
 app.configure ->
-  app.use exp.errorHandler dumpExceptions: true, showStack: true
-  app.use require('stylus').middleware src: pub, compress: true
-  app.use exp.static pub
+  app.use express.errorHandler dumpExceptions: true, showStack: true
+  app.use stylus.middleware src: public, compress: true
+  app.use express.static public
 
-app.get '/', (req, res)-> res.render 'index.jade', title: 'Hello World'
+app.get '/', (request, response)-> response.render 'index.jade', title: 'Hello World'
 
 app.listen process.env.PORT || 5000
