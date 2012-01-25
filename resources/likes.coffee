@@ -11,7 +11,7 @@ exports.new = (request, response)->
 exports.create = (request, response)->
   like = new Like request.body.like
   like.save()
-  response.redirect '/likes/#{like.id}'
+  response.redirect '/likes/' + like.id
 
 # show
 exports.show = (request, response)->
@@ -26,7 +26,7 @@ exports.edit = (request, response)->
 # update
 exports.update = (request, response)->
   Like.update { _id: request.params.like }, request.body.like, upset: true, (error)->
-    response.redirect '/likes/#{request.params.like}'
+    response.redirect '/likes/' + request.params.like
 
 # destroy
 exports.destroy = (request, response)->
