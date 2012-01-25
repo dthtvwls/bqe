@@ -1,0 +1,7 @@
+- for (key in likes)
+  a(href='/likes/#{likes[key].id}')= likes[key]
+  &nbsp;
+  a(href='/likes/#{likes[key].id}/edit') edit
+  br
+
+a(href='/likes/new') new
