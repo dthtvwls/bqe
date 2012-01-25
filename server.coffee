@@ -13,11 +13,8 @@ app.configure ->
   app.set 'view engine', 'jade'
   app.use app.router
 
-# Set up Socket.IO with xhr settings for Heroku
-io = require('socket.io').listen app, transports: ['xhr-polling'], 'polling duration': 10
-
-# Listen for messages on connected sockets and send them back
-io.sockets.on 'connection', (socket)-> socket.on 'message', (message)-> socket.send message
+# Socket.IO configuration
+io = require('./socket') app
 
 # facebook-client (https://github.com/DracoBlue/node-facebook-client)
 FacebookClient = require('facebook-client').FacebookClient
@@ -32,9 +29,6 @@ require('./models/like') mongoose
 # Include Express resources
 app.resource 'likes', require './resources/likes'
 
-app.get '/', (request, response)-> response.render 'home', title: 'Hello World'
-
-# Blitz
-#app.get '/mu-2ab3bb76-48723d6a-b7f2d339-da840b46', (request, response)-> response.send '42'
+app.get '/', (request, response)-> response.render 'index', title: 'Hello'
 
 app.listen process.env.PORT || 5000
