@@ -6,7 +6,7 @@ socket.on 'message', (message)-> alert message
 
 # If Socket.IO server is running correctly,
 # it will send our message back to the client
-#socket.send 'hello'
+socket.send 'hello'
 
 # Facebook init
 FB.init
@@ -18,5 +18,5 @@ FB.init
 
 # Login to FB account with permissions
 FB.login (response)->
-  #alert response.authResponse.accessToken if response.authResponse
+  alert response.authResponse.accessToken if response.authResponse
 , scope: 'email'

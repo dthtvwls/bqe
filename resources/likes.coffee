@@ -12,7 +12,7 @@ module.exports.new = (request, response)->
 
 module.exports.create = (request, response)->
   like = new exports.Like request.body.like
-  like.save
+  like.save()
   response.writeHead 303, 'Location': '/likes/' + like.id
   response.end()
 

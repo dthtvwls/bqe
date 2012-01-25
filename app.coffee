@@ -3,9 +3,6 @@ resource = require 'express-resource'
 mongoose = require 'mongoose'
 stylus   = require 'stylus'
 
-# Connect Mongoose to MongoDB
-mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
-
 # Create the Express app
 app = express.createServer express.logger(), express.bodyParser(), express.methodOverride()
 
@@ -17,14 +14,14 @@ app.configure ->
   app.set 'view engine', 'jade'
   app.use app.router
 
-app.get '/', (request, response)-> response.render 'index', title: 'Hello World'
-
+# Connect Mongoose to MongoDB
+mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
 
 # Include Mongoose models
-Like = require('./models/like') mongoose
+#Like = require('./models/like') mongoose
 
 # Include Express resources
-likes = app.resource 'likes', require('./resources/likes') Like
+#likes = app.resource 'likes', require('./resources/likes') Like
 
 
 # Set up Socket.IO with xhr settings for Heroku
@@ -34,5 +31,7 @@ io = require('socket.io').listen app,
 # Listen for messages on connected sockets and send them back
 io.sockets.on 'connection', (socket)-> socket.on 'message', (message)-> socket.send message
 
+
+app.get '/', (request, response)-> response.render 'index', title: 'Hello World'
 
 app.listen process.env.PORT || 5000
