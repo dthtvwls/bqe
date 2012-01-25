@@ -18,10 +18,10 @@ app.configure ->
 mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/fanometer'
 
 # Include Mongoose models
-#Like = require('./models/like') mongoose
+Like = require('./models/like') mongoose
 
 # Include Express resources
-#likes = app.resource 'likes', require('./resources/likes') Like
+likes = app.resource 'likes', require('./resources/likes') Like
 
 
 # Set up Socket.IO with xhr settings for Heroku
