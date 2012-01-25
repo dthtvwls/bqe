@@ -13,6 +13,7 @@ $.getScript '//connect.facebook.net/en_US/all.js', ->
     xfbml: true
     status: true
     cookie: true
+    channelUrl: 'https://fanometer.herokuapp.com/channel.html'
 
   # Login to FB account with permissions
   #FB.login (response)->

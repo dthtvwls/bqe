@@ -26,9 +26,12 @@ exports.edit = (request, response)->
 
 # update
 exports.update = (request, response)->
-  Like.update { id: request.params.like }, (error, like)->
-    response.render 'likes/show', title: request.params, like: like
+  Like.update { id: request.params.like }, request.body.like, {}, (error, like)->
+    response.writeHead 303, 'Location': '/likes/' + like.id
+    response.end()
 
 # destroy
 exports.destroy = (request, response)->
-  console.log request.params.like
+  Like.remove { id: request.params.like }, (error, like)->
+    response.writeHead 303, 'Location': '/likes'
+    response.end()
