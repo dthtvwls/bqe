@@ -1,12 +1,12 @@
 {
-  "name": "fanometer",
+  "name": "elvis",
   "version": "0.0.1",
   "dependencies": {
     "coffee-script"    : "1.2.0",
     "socket.io"        : "0.8.7",
     "express"          : "2.5.6",
     "express-resource" : "0.2.4",
-    "facebook-client"  : "1.6.0",
+    "express-mongoose" : "0.0.4",
     "mongoose"         : "2.4.10",
     "stylus"           : "0.22.6",
     "jade"             : "0.20.0",
@@ -14,6 +14,6 @@
     "backbone"         : "0.5.3"
   },
   "scripts": {
-    "start": "coffee server.coffee"
+    "start": "coffee app.coffee"
   }
 }

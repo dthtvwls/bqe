@@ -1,35 +1,28 @@
 # index
-exports.index = (request, response)->
-  likes = Like.find {}, (error, likes)->
-    response.render 'likes/index', title: 'title', likes: likes
+exports.index = (req, res)->
+  Like.find (err, likes)-> res.render 'likes/index', likes: likes
 
 # new
-exports.new = (request, response)->
-  response.render 'likes/new', title: 'title'
+exports.new = (req, res)-> res.render 'likes/new'
 
 # create
-exports.create = (request, response)->
-  like = new Like request.body.like
-  like.save()
-  response.redirect '/likes/' + like.id
+exports.create = (req, res)->
+  like = new Like req.body.like
+  like.save (err)-> res.redirect "/likes/#{like.id}"
 
 # show
-exports.show = (request, response)->
-  Like.findById request.params.like, (error, like)->
-    response.render 'likes/show', title: 'title', like: like
+exports.show = (req, res)->
+  Like.findById req.params.like, (err, like)-> res.render 'likes/show', like: like
 
 # edit
-exports.edit = (request, response)->
-  Like.findById request.params.like, (error, like)->
-    response.render 'likes/edit', title: 'title', like: like
+exports.edit = (req, res)->
+  Like.findById req.params.like, (err, like)-> res.render 'likes/edit', like: like
 
 # update
-exports.update = (request, response)->
-  Like.update { _id: request.params.like }, request.body.like, upset: true, (error)->
-    response.redirect '/likes/' + request.params.like
+exports.update = (req, res)->
+  Like.update { _id: req.params.like }, req.body.like, upset: true, (err)->
+    res.redirect "/likes/#{req.params.like}"
 
 # destroy
-exports.destroy = (request, response)->
-  Like.findById request.params.like, (error, like)->
-    like.remove()
-    response.redirect '/likes'
+exports.destroy = (req, res)->
+  Like.findById req.params.like, (err, like)-> like.remove (err)-> res.redirect '/likes'
