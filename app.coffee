@@ -19,7 +19,7 @@ app = express.createServer().configure ->
 io = require('./socket') app
 
 # Connect Mongoose to MongoDB
-mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/pelvis'
+mongoose.connect process.env.MONGOHQ_URL || 'mongodb://localhost/bqe'
 
 # Include Mongoose models
 require('./models/like') mongoose
