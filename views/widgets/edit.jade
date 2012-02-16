@@ -1,0 +1,4 @@
+form(action='/widgets/#{widget.id}', method='post')
+  input(type='hidden', name='_method', value='put')
+  input(name='widget[name]', value='#{widget.name}')
+  input(type='submit')

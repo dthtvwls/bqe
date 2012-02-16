@@ -1,9 +1,0 @@
-- for (key in likes)
-  a(href='/likes/#{likes[key].id}')= likes[key]
-  button(onclick='window.location="/likes/#{likes[key].id}/edit"') edit
-  form(action='/likes/#{likes[key].id}', method='post', style='display:inline')
-    input(type='hidden', name='_method', value='delete')
-    input(type='submit', value='delete')
-  br
-
-a(href='/likes/new') new
