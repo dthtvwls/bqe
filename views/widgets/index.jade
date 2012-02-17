@@ -1,23 +1,28 @@
 #widgets
 
+  table
+    - for (key in widgets)
+      tr
+        td
+          = widgets[key].name
+        td
+          form(action='/widgets/#{widgets[key].id}')
+            input(type='submit', value='show')
+        td
+          form(action='/widgets/#{widgets[key].id}/edit')
+            input(type='submit', value='edit')
+        td
+          form(action='/widgets/#{widgets[key].id}', method='post')
+            input(type='hidden', name='_method', value='delete')
+            input(type='submit', value='destroy')
 
-table
-  - for (key in widgets)
-    tr
-      td
-        = widgets[key].name
-      td
-        form(action='/widgets/#{widgets[key].id}')
-          input(type='submit', value='show')
-      td
-        form(action='/widgets/#{widgets[key].id}/edit')
-          input(type='submit', value='edit')
-      td
-        form(action='/widgets/#{widgets[key].id}', method='post')
-          input(type='hidden', name='_method', value='delete')
-          input(type='submit', value='destroy')
+  br
 
-br
+  form(action='/widgets/new')
+    input(type='submit', value='+ new widget')
 
-form(action='/widgets/new')
-  input(type='submit', value='+ new widget')
+
+script(type='text/coffeescript')
+ |$ ->
+ |  window.router = new App.Routers.WidgetsRouter widgets: !{JSON.stringify(widgets)}
+ |  Backbone.history.start()

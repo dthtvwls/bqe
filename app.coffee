@@ -27,6 +27,4 @@ io = require('./socket') app
 # Include Express resources
 app.resource 'widgets', require './resources/widgets'
 
-app.get '/', (req, res)-> res.render 'index'
-
 app.listen process.env.PORT || 5000
