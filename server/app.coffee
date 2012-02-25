@@ -1,8 +1,8 @@
-express  = require 'express'
-resource = require 'express-resource'
-mongoose = require('mongoose').connect process.env.MONGOHQ_URL || 'mongodb://localhost/bqe'
+express = require 'express'
+mongoose = require('mongoose').connect process.env.MONGOHQ_URL || 'mongodb://localhost/yoyo'
+require 'express-resource'
+#require 'consolidate'
 
-# Express configuration
 app = express.createServer().configure ->
   @use express.logger()
   @use express.bodyParser()
@@ -10,23 +10,27 @@ app = express.createServer().configure ->
   @use express.methodOverride()
   @use express.static 'client'
   @use express.session secret: 'secret'
-  @use express.errorHandler dumpExceptions: true, showStack: true
   @use require('stylus').middleware src: 'client', compress: true
   @set 'views', "#{__dirname}/views"
   @set 'view engine', 'jade'
   @use @router
+.configure 'development', ->
+  @use express.errorHandler dumpExceptions: true, showStack: true
+.configure 'production', ->
+  @use express.errorHandler
+.listen process.env.PORT || 5000
 
-# Mongoose models
 require('./models/widget') mongoose
 
-# Express resources
 app.resource 'widgets', require './resources/widgets'
 
-app.listen process.env.PORT || 5000
 
 # Socket.IO (use xhr settings for Heroku/Joyent)
-# require('socket.io').listen app, transports: ['xhr-polling'], 'polling duration': 10
+#options = transports: ['xhr-polling'], 'polling duration': 10
 io = require('socket.io').listen(app).sockets.on 'connection', (socket)->
+
+  # (debug) Listen for messages on connected sockets and send them back
+  socket.on 'message', (message)-> socket.send message
 
   socket.on 'create', (data)->
     e = event 'create', data.signature
@@ -48,9 +52,6 @@ io = require('socket.io').listen(app).sockets.on 'connection', (socket)->
     e = event 'delete', data.signature
     data = []
     socket.emit e, success: true
-
-  # Listen for messages on connected sockets and send them back
-  socket.on 'message', (message)-> socket.send message
 
 event = (operation, sig)->
   e = operation + ':'

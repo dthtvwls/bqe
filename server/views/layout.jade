@@ -8,10 +8,15 @@ html
     script(src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.1/underscore-min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.1/backbone-min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.2.0/coffee-script.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js')
     script(src='/socket.io/socket.io.js')
     script(type='text/coffeescript', src='/app.coffee')
     script(type='text/coffeescript', src='/templates/widgets.coffee')
     script(type='text/coffeescript', src='/models/widgets.coffee')
     script(type='text/coffeescript', src='/views/widgets.coffee')
     script(type='text/coffeescript', src='/routers/widgets.coffee')
+    script(type='text/coffeescript')
+     |$ ->
+     |  window.router = new App.Routers.WidgetsRouter widgets: !{JSON.stringify(widgets)}
+     |  Backbone.history.start()
   body!= body

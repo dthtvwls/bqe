@@ -20,9 +20,3 @@
 
   form(action='/widgets/new')
     input(type='submit', value='+ new widget')
-
-
-script(type='text/coffeescript')
- |$ ->
- |  window.router = new App.Routers.WidgetsRouter widgets: !{JSON.stringify(widgets)}
- |  Backbone.history.start()

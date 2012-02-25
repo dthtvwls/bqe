@@ -3,7 +3,7 @@
 @JST["backbone/templates/widgets/edit"] = (obj)->
   __p = []
   print = -> __p.push.apply __p, arguments
-  __p.push '<h1>Edit widget</h1>\n\n<form id="edit-widget" name="widget">\n  <div class="field">\n    <label for="name"> name:</label>\n    <input type="text" name="name" id="name" value="', obj.name ,'" >\n  </div>\n\n  <div class="actions">\n    <input type="submit" value="Update Widget" />\n  </div>\n\n</form>\n\n<a href="#/index">Back</a>\n'
+  __p.push '<h1>Edit widget</h1>\n\n<form id="edit-widget" name="widget">\n  <input type="hidden" name="_method" value="put" >\n  <div class="field">\n    <label for="name"> name:</label>\n    <input type="text" name="name" id="name" value="', obj.name ,'" >\n  </div>\n\n  <div class="actions">\n    <input type="submit" value="Update Widget" />\n  </div>\n\n</form>\n\n<a href="#/index">Back</a>\n'
   __p.join ''
 
 @JST["backbone/templates/widgets/index"] = (obj)->

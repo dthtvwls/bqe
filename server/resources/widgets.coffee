@@ -20,7 +20,7 @@ exports.edit = (req, res)->
 
 # update
 exports.update = (req, res)->
-  Widget.update { _id: req.params.widget }, req.body.widget, upset: true, (err)->
+  Widget.update { _id: req.params.widget }, req.body.widget, upsert: true, (err)->
     res.redirect "/widgets/#{req.params.widget}"
 
 # destroy

@@ -1,9 +1,3 @@
-window.App =
-  Models: {}
-  Collections: {}
-  Routers: {}
-  Views: {}
-
 do ($)->
   $.extend $.fn,
     backboneLink: (model)->
@@ -17,6 +11,18 @@ do ($)->
           attrs[el.attr("name")] = el.val()
           model.set attrs
 
+# Set up Socket.IO on client
+window.socket = io.connect window.location.hostname
+window.socket.on 'message', (message)-> alert message
+
+
+window.App =
+  Models: {}
+  Collections: {}
+  Routers: {}
+  Views: {}
+
+
 methodMap =
   'create': 'POST'
   'update': 'PUT'
@@ -29,11 +35,8 @@ getUrl = (object)->
 
 urlError = -> throw new Error "A 'url' property or function must be specified"
 
-# Set up Socket.IO on client
-window.socket = io.connect window.location.hostname
-window.socket.on 'message', (message)-> alert message
 
-# Override sync method to use Socket.IO
+# Override sync method
 Backbone.sync = (method, model, options)->
 
   type = methodMap[method]

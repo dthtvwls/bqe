@@ -1,16 +1,15 @@
 {
-  "name": "bqe",
+  "name": "yoyo",
   "version": "0.0.1",
   "dependencies": {
     "coffee-script"    : "1.2.0",
     "socket.io"        : "0.8.7",
     "express"          : "2.5.8",
     "express-resource" : "0.2.4",
-    "mongoose"         : "2.5.7",
-    "stylus"           : "0.23.0",
-    "jade"             : "0.20.1"
-  },
-  "scripts": {
-    "start": "coffee server/app.coffee"
+    "mongoose"         : "2.5.9",
+    "stylus"           : "0.24.0",
+    "jade"             : "0.20.3",
+    "handlebars"       : "1.0.5beta",
+    "consolidate"      : "0.1.0"
   }
 }
