@@ -1,6 +1,6 @@
 # index
 exports.index = (req, res)->
-  Widget.find (err, widgets)-> res.render 'widgets/index', widgets: widgets
+  Widget.find (err, widgets)-> res.render 'widgets/index', widgets: widgets, json: JSON.stringify widgets
 
 # new
 exports.new = (req, res)-> res.render 'widgets/new'
