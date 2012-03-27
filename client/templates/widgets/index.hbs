@@ -1,0 +1,18 @@
+<div id="widgets">
+  <table>
+    {{#widgets}}
+      <tr>
+        <td>{{name}}</td>
+        <td><a href="/widgets/{{id}}">show</a></td>
+        <td><a href="/widgets/{{id}}/edit">edit</a></td>
+        <td>
+          <form action="/widgets/{{id}}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="destroy">
+          </form>
+        </td>
+      </tr>
+    {{/widgets}}
+  </table>
+  <a href="/widgets/new">+ new widget</a>
+</div>

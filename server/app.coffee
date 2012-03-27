@@ -1,29 +1,28 @@
+mongoose = require('mongoose').connect process.env.MONGOHQ_URL || 'mongodb://localhost/bqe'
 express = require 'express'
-mongoose = require('mongoose').connect process.env.MONGOHQ_URL || 'mongodb://localhost/yoyo'
 require 'express-resource'
-#require 'consolidate'
+
+require('./models/widget') mongoose
 
 app = express.createServer().configure ->
   @use express.logger()
   @use express.bodyParser()
-  @use express.cookieParser()
   @use express.methodOverride()
+  @use express.cookieParser 'changeme'
+  @use express.session secret: 'changeme'
   @use express.static 'client'
-  @use express.session secret: 'secret'
   @use require('stylus').middleware src: 'client', compress: true
-  @set 'views', "#{__dirname}/views"
-  @set 'view engine', 'jade'
+  @set 'views', "#{__dirname}/../client/templates"
+  @set 'view engine', 'hbs'
   @use @router
 .configure 'development', ->
   @use express.errorHandler dumpExceptions: true, showStack: true
 .configure 'production', ->
-  @use express.errorHandler
-.listen process.env.PORT || 5000
-
-require('./models/widget') mongoose
+  @use express.errorHandler()
+.listen process.env.PORT || 3000
 
 app.resource 'widgets', require './resources/widgets'
-
+app.get '/', (req, res)-> res.render 'index'
 
 # Socket.IO (use xhr settings for Heroku/Joyent)
 #options = transports: ['xhr-polling'], 'polling duration': 10

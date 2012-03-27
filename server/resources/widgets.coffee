@@ -7,8 +7,7 @@ exports.new = (req, res)-> res.render 'widgets/new'
 
 # create
 exports.create = (req, res)->
-  widget = new Widget req.body.widget
-  widget.save (err)-> res.redirect "/widgets/#{widget.id}"
+  new Widget(req.body.widget).save (err)-> res.redirect '/widgets'
 
 # show
 exports.show = (req, res)->
@@ -20,8 +19,7 @@ exports.edit = (req, res)->
 
 # update
 exports.update = (req, res)->
-  Widget.update { _id: req.params.widget }, req.body.widget, upsert: true, (err)->
-    res.redirect "/widgets/#{req.params.widget}"
+  Widget.update { _id: req.params.widget }, req.body.widget, upsert: true, (err)-> res.redirect '/widgets'
 
 # destroy
 exports.destroy = (req, res)->

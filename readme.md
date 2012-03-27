@@ -1,19 +1,16 @@
-This project is called BQE because I like [TLAs](http://en.wikipedia.org/wiki/Three-letter_acronym) and NYC (also a TLA).
+This project is called BQE because I'm a big fan of
+[TLAs](http://en.wikipedia.org/wiki/Three-letter_acronym) and of NYC (which is also a TLA).
 It could stand for "Backbone Q. Express" (look, it's hard to backronym "Q", ok?),
-but it also uses Socket.IO, Mongo, and some other stuff I'm sure you already like.
-It is not a framework (yet), just an example CRUD MVC (hey, another TLA!) app.
+but it also uses MongoDB, Socket.IO, CoffeeScript, and plenty of other cool stuff.
+It is not a framework but a structure for an MVC (hey, another TLA!) CRUD app.
 
-Why? Harry Brundage has already [put it so well](http://harry.me/2011/01/27/today-web-development-sucks/).
-Basically, I want both code and data to go between client and server as seamlessly as possible.
+To understand the motivation behind this project, start with this post by
+[Harry Brundage](http://harry.me/2011/01/27/today-web-development-sucks/).
 
 There are a number of strategies being used or planned for use which I will write about later.
 
-I use [foreman](https://github.com/ddollar/foreman) to run:
+To run:
 
-`foreman start`
+`npm start`
 
-but you can always just
-
-`coffee server/app.coffee`
-
-and visit [http://localhost:5000/widgets](http://localhost:5000/widgets)
+and visit [http://localhost:3000/widgets](http://localhost:3000/widgets)
