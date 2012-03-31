@@ -5,20 +5,26 @@ require 'express-resource'
 require('./models/widget') mongoose
 
 app = express.createServer().configure ->
+  @set 'views', "#{__dirname}/public/templates"
+  @set 'view engine', 'hbs'
   @use express.logger()
   @use express.bodyParser()
   @use express.methodOverride()
   @use express.cookieParser 'changeme'
   @use express.session secret: 'changeme'
-  @use express.static 'client'
-  @use require('stylus').middleware src: 'client', compress: true
-  @set 'views', "#{__dirname}/../client/templates"
-  @set 'view engine', 'hbs'
   @use @router
+  @use require('stylus').middleware
+    compress: true
+    src: 'public'
+  @use express.static 'public'
 .configure 'development', ->
-  @use express.errorHandler dumpExceptions: true, showStack: true
+  @use express.errorHandler
+    dumpExceptions: true
+    showStack: true
 .configure 'production', ->
   @use express.errorHandler()
+.dynamicHelpers
+  flash: (req, res)-> req.flash()
 .listen process.env.PORT || 3000
 
 app.resource 'widgets', require './resources/widgets'

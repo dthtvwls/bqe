@@ -1,14 +1,10 @@
 #$LAB
+#.script('/socket.io/socket.io.js')
 #.script('//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
 #.script('//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js')
-#.script('//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.1/underscore-min.js')
-#.script('//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.1/backbone-min.js')
 #.script('//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js')
-#.script('/socket.io/socket.io.js')
-#.script('/templates/widgets.coffee')
-#.script('/models/widgets.coffee')
-#.script('/views/widgets.coffee')
-#.script('/routers/widgets.coffee').wait ->
+#.script('//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.1/underscore-min.js').wait()
+#.script('//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.1/backbone-min.js').wait ->
 
   do ($)->
     $.extend $.fn,

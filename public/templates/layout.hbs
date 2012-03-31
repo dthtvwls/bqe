@@ -2,18 +2,19 @@
 <html>
   <head>
     <title>BQE</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     {{{body}}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/labjs/2.0.3/LAB.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.2.0/coffee-script.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.1/underscore-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.1/backbone-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.2.0/coffee-script.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script type="text/coffeescript" src="/app.coffee"></script>
+    <script type="text/coffeescript" src="/script.coffee"></script>
     <script type="text/coffeescript" src="/templates/widgets.coffee"></script>
     <script type="text/coffeescript" src="/models/widgets.coffee"></script>
     <script type="text/coffeescript" src="/views/widgets.coffee"></script>
@@ -23,10 +24,5 @@
         window.router = new App.Routers.WidgetsRouter widgets: {{{json}}}
         Backbone.history.start()
     </script>
-    <!--
-      <script src="//cdnjs.cloudflare.com/ajax/libs/labjs/2.0.3/LAB.min.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.2.0/coffee-script.min.js"></script>
-      <script src="/app.coffee" type="text/coffeescript"></script>
-    -->
   </body>
 </html>
