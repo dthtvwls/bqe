@@ -6,8 +6,7 @@
     "npm"  : "1.1.9"
   },
   "scripts": {
-    "start": "coffee server.coffee > server.log 2>&1 &",
-    "stop" : "killall node",
+    "start": "killall node; coffee server.coffee > server.log 2>&1 &",
     "test" : "jasmine-node --coffee spec"
   },
   "dependencies": {
