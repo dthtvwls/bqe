@@ -27,8 +27,8 @@ app = express.createServer().configure ->
   flash: (req, res)-> req.flash()
 .listen process.env.PORT || 3000
 
+app.get '/', (req, res)-> res.render ''
 app.resource 'widgets', require './resources/widgets'
-app.get '/', (req, res)-> res.render 'index'
 
 # Socket.IO (use xhr settings for Heroku/Joyent)
 #options = transports: ['xhr-polling'], 'polling duration': 10

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# output files
+CSS=public/style.css
+JS=public/script.js
+
+# remove old
+rm -f $CSS $JS
+
+# fetch css libs
+curl http://{\
+twitter.github.com/bootstrap/assets/css/bootstrap,\
+twitter.github.com/bootstrap/assets/css/bootstrap-responsive,\
+taitems.github.com/Aristo-jQuery-UI-Theme/css/Aristo/Aristo\
+}.css >> $CSS
+
+# fetch js libs (curl won't load these for whatever reason)
+wget -qO- http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js >> $JS
+wget -qO- http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js >> $JS
+echo ';' >> $JS # jQuery UI doesn't end with a semicolon
+
+# compile/minify css & js
+stylus -c < public/style.styl >> $CSS
+csso $CSS $CSS
+coffee -p public/script.coffee >> $JS
+uglifyjs --overwrite $JS
