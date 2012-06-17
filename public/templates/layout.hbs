@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>BQE</title>
-    <link rel="stylesheet" href="/helper.css">
+    <link rel="stylesheet" href="/{{env}}.css">
   </head>
   <body>
     {{{body}}}
@@ -20,7 +20,7 @@
     <script type="text/coffeescript" src="/routers/widgets.coffee"></script>
     <script type="text/coffeescript">
       $ ->
-        window.router = new App.Routers.WidgetsRouter widgets: {{{json}}}
+        window.router = new App.Routers.Widgets widgets: {{{json}}}
         Backbone.history.start()
     </script>
   </body>

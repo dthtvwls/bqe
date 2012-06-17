@@ -1,7 +1,7 @@
-class App.Routers.WidgetsRouter extends Backbone.Router
+class App.Routers.Widgets extends Backbone.Router
 
   initialize: (options)->
-    @widgets = new App.Collections.WidgetsCollection()
+    @widgets = new App.Collections.Widgets()
     @widgets.reset options.widgets
 
   routes:

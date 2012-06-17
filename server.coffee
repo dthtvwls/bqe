@@ -1,8 +1,10 @@
 mongoose = require('mongoose').connect process.env.MONGOHQ_URL || 'mongodb://localhost/bqe'
-express = require 'express'
+express  = require 'express'
+gzippo   = require 'gzippo'
 require 'express-resource'
 
-require('./models/widget') mongoose
+Widget = mongoose.model 'Widget', new mongoose.Schema
+  name: String
 
 app = express.createServer().configure ->
   @set 'views', "#{__dirname}/public/templates"
@@ -13,22 +15,27 @@ app = express.createServer().configure ->
   @use express.cookieParser 'changeme'
   @use express.session secret: 'changeme'
   @use @router
+.configure 'development', ->
   @use require('stylus').middleware
     compress: true
     src: 'public'
   @use express.static 'public'
-.configure 'development', ->
   @use express.errorHandler
     dumpExceptions: true
     showStack: true
 .configure 'production', ->
+  @use gzippo.staticGzip 'public'
   @use express.errorHandler()
+.helpers
+  env: -> app.settings.env+'' || process.env
 .dynamicHelpers
-  flash: (req, res)-> req.flash()
+  user:    (req, res)-> req.user
+  flash:   (req, res)-> req.flash()
+  session: (req, res)-> req.session
 .listen process.env.PORT || 3000
 
 app.get '/', (req, res)-> res.render ''
-app.resource 'widgets', require './resources/widgets'
+app.resource 'widgets', require './widgets'
 
 # Socket.IO (use xhr settings for Heroku/Joyent)
 #options = transports: ['xhr-polling'], 'polling duration': 10

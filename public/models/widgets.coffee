@@ -3,6 +3,6 @@ class App.Models.Widget extends Backbone.Model
   paramRoot: 'widget'
   defaults: name: null
 
-class App.Collections.WidgetsCollection extends Backbone.Collection
+class App.Collections.Widgets extends Backbone.Collection
   model: App.Models.Widget
   url: '/widgets'

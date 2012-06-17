@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # output files
-CSS=public/style.css
-JS=public/script.js
+CSS=public/production.css
+JS=public/production.js
 
 # remove old
 rm -f $CSS $JS
