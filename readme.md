@@ -12,3 +12,5 @@ There are a number of strategies being used or planned for use which I will writ
 To run: `npm start` and visit [http://localhost:3000/widgets](http://localhost:3000/widgets)
 
 `npm stop` to stop, or use `coffee server.coffee` to run in the foreground.
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/dthtvwls/bqe.svg)](https://greenkeeper.io/)
